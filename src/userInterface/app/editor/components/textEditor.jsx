@@ -4,8 +4,8 @@ import { editorOption } from '../../../../common/editorConfigure/buttonList'
 
 const TextEditor = () => {
   return (
-    <div className='textEditorDiv container'>
-        <div className=' alignment d-flex justify-content-center'>
+    <div className='textEditorDiv'>
+        <div className='alignment'>
         <SunEditor
       width="100%"
       height="100%"

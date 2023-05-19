@@ -19,9 +19,12 @@ code {
 .textEditorDiv{
   width: 100%;
   height: 100%;
-}
-.alignment{
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background: #eeeeee9e;
+}
+ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-dark.css-dev-only-do-not-override-15rg2km{
+  height: calc(100vh - 48px);
+
 }
