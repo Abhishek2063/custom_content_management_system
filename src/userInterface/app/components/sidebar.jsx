@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import {
-  AppstoreOutlined,
-  ContainerOutlined,
+  // AppstoreOutlined,
+  // ContainerOutlined,
   MenuFoldOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  MailOutlined,
+  // PieChartOutlined,
+  // DesktopOutlined,
   MenuUnfoldOutlined,
+  WindowsOutlined,
 } from "@ant-design/icons";
 import { Button, Menu } from "antd";
-const Sidebar = () => {
+import ModuleDiv from "../editor/components/models/moduleDiv/moduleDiv";
+
+const Sidebar = (props) => {
   function getItem(label, key, icon, children, type) {
     return {
       key,
@@ -20,23 +22,17 @@ const Sidebar = () => {
     };
   }
   const items = [
-    getItem("Option 1", "1", <PieChartOutlined />),
-    getItem("Option 2", "2", <DesktopOutlined />),
-    getItem("Option 3", "3", <ContainerOutlined />),
-    getItem("Navigation One", "sub1", <MailOutlined />, [
-      getItem("Option 5", "5"),
-      getItem("Option 6", "6"),
-      getItem("Option 7", "7"),
-      getItem("Option 8", "8"),
-    ]),
-    getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
-      getItem("Option 9", "9"),
-      getItem("Option 10", "10"),
-      getItem("Submenu", "sub3", null, [
-        getItem("Option 11", "11"),
-        getItem("Option 12", "12"),
-      ]),
-    ]),
+    getItem("Module Div", "1", <WindowsOutlined />),
+    // getItem("Option 2", "2", <DesktopOutlined />),
+    // getItem("Option 3", "3", <ContainerOutlined />),
+    // getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
+    //   getItem("Option 9", "9"),
+    //   getItem("Option 10", "10"),
+    //   getItem("Submenu", "sub3", null, [
+    //     getItem("Option 11", "11"),
+    //     getItem("Option 12", "12"),
+    //   ]),
+    // ]),
   ];
 
   const [collapsed, setCollapsed] = useState(false);
@@ -44,11 +40,18 @@ const Sidebar = () => {
     setCollapsed(!collapsed);
   };
 
+  const handleSideBarClick = ({ key }) => {
+    if (key === 1 || key === "1") {
+      props.setModuleShow({
+        ...props.moduleShow,
+        moduleDivSectionShow: true,
+      });
+    }
+  };
+
   return (
     <div>
-      <div
-        
-      >
+      <div>
         <Button
           type="primary"
           onClick={toggleCollapsed}
@@ -65,8 +68,25 @@ const Sidebar = () => {
           theme="dark"
           inlineCollapsed={collapsed}
           items={items}
+          onClick={({ key }) => handleSideBarClick({ key })}
         />
       </div>
+      <ModuleDiv
+        moduleShow={props.moduleShow}
+        setModuleShow={props.setModuleShow}
+        layoutOptions={props.layoutOptions}
+        layout={props.layout}
+        setLayout={props.setLayout}
+        shapeOptions={props.shapeOptions}
+        shapes={props.shapes}
+        setShapes={props.setShapes}
+        colors={props.colors}
+        setColors={props.setColors}
+        spacing={props.spacing}
+        setSpacing={props.setSpacing}
+        editorMessage={props.editorMessage}
+        setEditorMessage={props.setEditorMessage}
+      />
     </div>
   );
 };

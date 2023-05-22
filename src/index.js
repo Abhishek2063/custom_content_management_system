@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import 'suneditor/dist/css/suneditor.min.css';
+import "jodit/build/jodit.min.css";
 import ComponentStarter from './userInterface/app/routes/routes';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
