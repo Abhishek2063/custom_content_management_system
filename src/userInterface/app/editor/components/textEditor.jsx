@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import JoditEditor from "jodit-react";
 import { editorConfig } from "../../../../common/editorConfigure/joditReact";
+import FormBuilder from "./models/form/formDesign";
 
 const TextEditor = (props) => {
   const editorRef = useRef(null);
@@ -26,6 +27,7 @@ const TextEditor = (props) => {
           }}
         />
       </div>
+      <FormBuilder />
     </div>
   );
 };

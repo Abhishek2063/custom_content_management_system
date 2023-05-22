@@ -94,8 +94,8 @@ const Sidebar = (props) => {
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </Button>
         <Menu
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
+          // defaultSelectedKeys={["1"]}
+          // defaultOpenKeys={["sub1"]}
           mode="inline"
           theme="dark"
           inlineCollapsed={collapsed}

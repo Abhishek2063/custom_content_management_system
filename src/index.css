@@ -49,3 +49,18 @@ ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-dark.css-dev-only-do-not-over
   background-size: cover;
   cursor: move;
 }
+.form-field {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  background-color: antiquewhite;
+
+}
+.formFieldsContainer{
+  max-height: 600px;
+  overflow: auto;
+}
+.formPreviewContainer{
+  max-height: 600px;
+  overflow: auto;
+}

@@ -6,30 +6,30 @@ const FormModel = (props) => {
   const [fields, setFields] = useState([]);
 
   const addField = () => {
-    setFields([...fields, { label: "", placeholder: "", type: "text" }]);
+    setFields([
+      ...fields,
+      { label: "", placeholder: "", type: "text", options: [] },
+    ]);
   };
 
-  const handleLabelChange = (index, value) => {
+  const handleFieldChange = (index, field, value) => {
     const updatedFields = [...fields];
-    updatedFields[index].label = value;
-    setFields(updatedFields);
-  };
-
-  const handlePlaceholderChange = (index, value) => {
-    const updatedFields = [...fields];
-    updatedFields[index].placeholder = value;
-    setFields(updatedFields);
-  };
-
-  const handleTypeChange = (index, value) => {
-    const updatedFields = [...fields];
-    updatedFields[index].type = value;
+    updatedFields[index][field] = value;
     setFields(updatedFields);
   };
 
   const removeField = (index) => {
     const updatedFields = [...fields];
     updatedFields.splice(index, 1);
+    setFields(updatedFields);
+  };
+
+  const deleteOption = (index, optionIndex) => {
+    const updatedFields = [...fields];
+    const optionField = updatedFields[index];
+    const options = [...optionField.options];
+    options.splice(optionIndex, 1);
+    updatedFields[index].options = options;
     setFields(updatedFields);
   };
 
@@ -42,15 +42,15 @@ const FormModel = (props) => {
 
             <select
               value={field.type}
-              onChange={(e) => handleTypeChange(index, e.target.value)}
+              onChange={(e) => handleFieldChange(index, "type", e.target.value)}
             >
+              <option value="number">Number</option>
+              <option value="password">Password</option>
+              <option value="select">Select</option>
               <option value="text">Text</option>
               <option value="textarea">Textarea</option>
               {/* <option value="checkbox">Checkbox</option> */}
               {/* <option value="radio">Radio</option> */}
-              {/* <option value="select">Select</option> */}
-              <option value="number">Number</option>
-              <option value="password">Password</option>
 
               {/* Add more options for different field types */}
             </select>
@@ -61,7 +61,7 @@ const FormModel = (props) => {
             type="text"
             placeholder="Label"
             value={field.label}
-            onChange={(e) => handleLabelChange(index, e.target.value)}
+            onChange={(e) => handleFieldChange(index, "label", e.target.value)}
           />
         </div>
         <div className="m-2">
@@ -71,9 +71,45 @@ const FormModel = (props) => {
             type="text"
             placeholder="Placeholder"
             value={field.placeholder}
-            onChange={(e) => handlePlaceholderChange(index, e.target.value)}
+            onChange={(e) =>
+              handleFieldChange(index, "placeholder", e.target.value)
+            }
           />
         </div>
+
+        {field.type === "select" && (
+          <div>
+            <label className="labelfordiv fw-bold">Options:</label>
+            {field.options.map((option, optionIndex) => (
+              <div>
+                <input
+                  key={optionIndex}
+                  type="text"
+                  value={option}
+                  onChange={(e) => {
+                    const updatedOptions = [...field.options];
+                    updatedOptions[optionIndex] = e.target.value;
+                    handleFieldChange(index, "options", updatedOptions);
+                  }}
+                />
+                <button
+                  className="btn btn-danger"
+                  onClick={() => deleteOption(index, optionIndex)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+            <button
+              className="btn btn-primary m-2"
+              onClick={() =>
+                handleFieldChange(index, "options", [...field.options, ""])
+              }
+            >
+              Add Option
+            </button>
+          </div>
+        )}
 
         <button className="btn btn-danger" onClick={() => removeField(index)}>
           Remove
@@ -136,20 +172,34 @@ const FormModel = (props) => {
             <button className="btn btn-primary" onClick={addField}>
               Add Field
             </button>
-            {renderFields()}
+            <div className="formFieldsContainer">{renderFields()}</div>
           </div>
           <div className="col-6">
-            <h2>Preview Background Image</h2>
-            {fields.map((field, index) => (
-              <div key={index} className="m-2">
-                <label className="labelfordiv fw-bold">{field.label} : </label>
-                {field.type === "textarea" ? (
-                  <textarea placeholder={field.placeholder} />
-                ) : (
-                  <input type={field.type} placeholder={field.placeholder} />
-                )}
-              </div>
-            ))}
+            <h2>Preview Form</h2>
+            <div className="formPreviewContainer">
+              {fields.map((field, index) => (
+                <div key={index} className="m-2">
+                  <label className="labelfordiv fw-bold">
+                    {field.label} :{" "}
+                  </label>
+                  {field.type === "textarea" ? (
+                    <textarea placeholder={field.placeholder} />
+                  ) : field.type === "select" ? (
+                    <select name={field.label} id="cars">
+                      {field.options && field.options.length > 0
+                        ? field.options.map((option, index) => (
+                            <option value={option} key={index}>
+                              {option}
+                            </option>
+                          ))
+                        : ""}
+                    </select>
+                  ) : (
+                    <input type={field.type} placeholder={field.placeholder} />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </Modal>
