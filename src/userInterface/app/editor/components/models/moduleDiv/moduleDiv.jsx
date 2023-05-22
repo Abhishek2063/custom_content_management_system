@@ -65,6 +65,9 @@ const ModuleDiv = (props) => {
     props.setModuleShow({
       ...props.moduleShow,
       moduleDivSectionShow: false,
+      buttonSectionShow: false,
+    backgroundImageSectionShow: false,
+    FormSectionShow: false,
     });
 
     props.setEditorMessage({
@@ -76,6 +79,9 @@ const ModuleDiv = (props) => {
     props.setModuleShow({
       ...props.moduleShow,
       moduleDivSectionShow: false,
+      buttonSectionShow: false,
+    backgroundImageSectionShow: false,
+    FormSectionShow: false,
     });
   };
   return (
@@ -168,7 +174,7 @@ const ModuleDiv = (props) => {
                 <input
                   type="range"
                   min="0"
-                  max="50"
+                  max="5"
                   value={props.spacing}
                   onChange={(e) =>
                     handleSpacingChange(parseInt(e.target.value))

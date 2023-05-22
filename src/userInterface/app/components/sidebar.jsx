@@ -7,9 +7,15 @@ import {
   // DesktopOutlined,
   MenuUnfoldOutlined,
   WindowsOutlined,
+  BuildFilled,
+  FileImageFilled,
+  FormOutlined,
 } from "@ant-design/icons";
 import { Button, Menu } from "antd";
 import ModuleDiv from "../editor/components/models/moduleDiv/moduleDiv";
+import ButtonModel from "../editor/components/models/button/buttonModel";
+import BackgroundImageModel from "../editor/components/models/backgroundImage/backgroundImageModel";
+import FormModel from "../editor/components/models/form/formModel";
 
 const Sidebar = (props) => {
   function getItem(label, key, icon, children, type) {
@@ -23,16 +29,9 @@ const Sidebar = (props) => {
   }
   const items = [
     getItem("Module Div", "1", <WindowsOutlined />),
-    // getItem("Option 2", "2", <DesktopOutlined />),
-    // getItem("Option 3", "3", <ContainerOutlined />),
-    // getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
-    //   getItem("Option 9", "9"),
-    //   getItem("Option 10", "10"),
-    //   getItem("Submenu", "sub3", null, [
-    //     getItem("Option 11", "11"),
-    //     getItem("Option 12", "12"),
-    //   ]),
-    // ]),
+    getItem("Button", "2", <BuildFilled />),
+    getItem("Background Image", "3", <FileImageFilled />),
+    getItem("Form", "4", <FormOutlined />),
   ];
 
   const [collapsed, setCollapsed] = useState(false);
@@ -45,6 +44,39 @@ const Sidebar = (props) => {
       props.setModuleShow({
         ...props.moduleShow,
         moduleDivSectionShow: true,
+        buttonSectionShow: false,
+        backgroundImageSectionShow: false,
+        FormSectionShow: false,
+      });
+    }
+
+    if (key === 2 || key === "2") {
+      props.setModuleShow({
+        ...props.moduleShow,
+        moduleDivSectionShow: false,
+        buttonSectionShow: true,
+        backgroundImageSectionShow: false,
+        FormSectionShow: false,
+      });
+    }
+
+    if (key === 3 || key === "3") {
+      props.setModuleShow({
+        ...props.moduleShow,
+        moduleDivSectionShow: false,
+        buttonSectionShow: false,
+        backgroundImageSectionShow: true,
+        FormSectionShow: false,
+      });
+    }
+
+    if (key === 4 || key === "4") {
+      props.setModuleShow({
+        ...props.moduleShow,
+        moduleDivSectionShow: false,
+        buttonSectionShow: false,
+        backgroundImageSectionShow: false,
+        FormSectionShow: true,
       });
     }
   };
@@ -86,6 +118,26 @@ const Sidebar = (props) => {
         setSpacing={props.setSpacing}
         editorMessage={props.editorMessage}
         setEditorMessage={props.setEditorMessage}
+      />
+      <ButtonModel 
+       moduleShow={props.moduleShow}
+       setModuleShow={props.setModuleShow}
+       editorMessage={props.editorMessage}
+       setEditorMessage={props.setEditorMessage}
+      />
+
+      <BackgroundImageModel 
+        moduleShow={props.moduleShow}
+        setModuleShow={props.setModuleShow}
+        editorMessage={props.editorMessage}
+        setEditorMessage={props.setEditorMessage}
+      /> 
+
+      <FormModel 
+         moduleShow={props.moduleShow}
+         setModuleShow={props.setModuleShow}
+         editorMessage={props.editorMessage}
+         setEditorMessage={props.setEditorMessage}
       />
     </div>
   );

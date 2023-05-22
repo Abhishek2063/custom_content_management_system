@@ -9,6 +9,9 @@ import ViewComfyIcon from "@mui/icons-material/ViewComfy";
 const ComponentStarter = () => {
   const [moduleShow, setModuleShow] = useState({
     moduleDivSectionShow: false,
+    buttonSectionShow: false,
+    backgroundImageSectionShow: false,
+    FormSectionShow: false,
   });
 
   // Editor State
