@@ -81,7 +81,7 @@ const FormModel = (props) => {
           <div>
             <label className="labelfordiv fw-bold">Options:</label>
             {field.options.map((option, optionIndex) => (
-              <div>
+              <div key={optionIndex}>
                 <input
                   key={optionIndex}
                   type="text"
