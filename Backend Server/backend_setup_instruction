@@ -1,0 +1,16 @@
+** install node
+npm init
+
+
+** install express and mongoose
+npm i express mongoose
+
+** install dotenv nodemon
+npm i --save-dev dotenv nodemon
+
+
+** install cors to setup connection between frontend and backend.
+npm i cors
+
+** to start the server
+npm run devStart

@@ -11,11 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.combinedPart{
-  width: 100%;
-  height: 100vh;
-}
-/* .mainFile{
+
+.mainFile{
   width: 100%;
   height: 100vh;
 }
@@ -26,9 +23,9 @@ code {
   align-items: center;
   justify-content: center;
   background: #eeeeee9e;
-} */
-ul.ant-menu{
-  height: calc(100vh - 92px);
+}
+ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-dark.css-dev-only-do-not-override-15rg2km{
+  height: calc(100vh - 48px);
 
 }
 .jodit-wysiwyg{
@@ -66,28 +63,4 @@ ul.ant-menu{
 .formPreviewContainer{
   max-height: 600px;
   overflow: auto;
-}
-.logo-head {
-  background: #001628;
-  position: relative;
-}
-span.logo-text {
-  color: #fff;
-  width: 100%;
-  text-align: center;
-  display: inline-block;
-  font-size: 40px;
-}
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.textEditorDiv {
-  padding: 20px;
-  background: #eee;
-  height: calc(100vh - 128px);
-}
-footer{
-  padding-top: 10px;
 }

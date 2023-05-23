@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import "jodit/build/jodit.min.css";
-import Main from './components/main';
+import ComponentStarter from './userInterface/app/routes/routes';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Main />
+    <ComponentStarter />
   </React.StrictMode>
 );
 
