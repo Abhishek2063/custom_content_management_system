@@ -1,0 +1,17 @@
+user have the option module Div
+in the module div user have two screen first for desiging screen and preview screen.
+on the desgining screen,all the desgining will maintain by bootstrap
+user have six types of layout to design the div
+layout 1 col [12]
+layout 2 col [6,6]
+layout 3 col [4,4,4]
+layout 4 col [3,3,3,3]
+layout 5 col [12,6,6]
+layout 6 col [12,4,4,4]
+other than that user have option to enter his details of cols and we need to desgin the div layout according to it.
+user have the option to provide the shape of all the div by a dropdown like rounded, circle, square
+user have the option to provide different colors to different divs. user can provide the gradient color to the divs.
+user can maintain the space between the divs.
+user can maintain the height and width in percentage or pixcel by default height and width of a div is 100 px
+in react js
+

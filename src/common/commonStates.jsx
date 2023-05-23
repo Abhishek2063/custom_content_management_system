@@ -25,3 +25,16 @@ export const useModelShowHide = () => {
 
   return [modelShowHide, setModelShowHide];
 };
+
+export const useModuleDivModelStates = () => {
+  const [moduleDivStates, setModuleDivStates] = useState({
+    layout : [12],
+    shape : "square",
+    colors : [],
+    spacing : 10,
+    divWidth : 100,
+    divHeight : 100
+  });
+
+  return [moduleDivStates, setModuleDivStates];
+};

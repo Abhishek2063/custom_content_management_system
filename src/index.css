@@ -94,3 +94,10 @@ footer{
 .dropdown-item-popover:hover{
   background-color: #80808061;
 }
+.moduleDivDesigningScreen {
+  border: 1px solid black;
+}
+
+.moduleDivPreviewScreen{
+  border: 1px solid black;
+}

@@ -54,7 +54,6 @@ const Header = (props) => {
       <Popover
         overlayClassName=""
         placement="bottomLeft"
-        trigger="click"
         content={
           <div>
             <button
@@ -68,21 +67,21 @@ const Header = (props) => {
               className="dropdown-item-popover btn btn-block"
               onClick={(e) => handlePoverOptionClick("Button")}
             >
-              <BuildFilled /> Button
+              <BuildFilled />{" "} Button
             </button>
 
             <button
               className="dropdown-item-popover btn btn-block"
               onClick={(e) => handlePoverOptionClick("Background Image")}
             >
-              <FileImageFilled /> BackgroundImage
+              <FileImageFilled />{" "} BackgroundImage
             </button>
 
             <button
               className="dropdown-item-popover btn btn-block"
               onClick={(e) => handlePoverOptionClick("Form")}
             >
-              <FormOutlined /> Form
+              <FormOutlined />{" "} Form
             </button>
           </div>
         }
@@ -94,17 +93,17 @@ const Header = (props) => {
 
       <div className="ml-auto gap-2 d-flex">
         <button type="submit" className="btn btn-primary btn-lg">
-          {" "}
-          <BookOutlined /> Publish
+          
+          <BookOutlined />  {" "} Publish
         </button>
 
         <button type="submit" className="btn btn-warning btn-lg">
-          <EyeOutlined />
+          <EyeOutlined />{" "}
           Preview
         </button>
 
         <button type="submit" className="btn btn-success btn-lg">
-          <CloudDownloadOutlined />
+          <CloudDownloadOutlined />{" "}
           Save
         </button>
       </div>
