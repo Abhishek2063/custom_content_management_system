@@ -91,3 +91,6 @@ span.logo-text {
 footer{
   padding-top: 10px;
 }
+.dropdown-item-popover:hover{
+  background-color: #80808061;
+}

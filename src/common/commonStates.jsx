@@ -13,3 +13,15 @@ export const useEditorMessage = () => {
 
   return [editorMessage, setEditorMessage];
 };
+
+export const useModelShowHide = () => {
+  const [modelShowHide, setModelShowHide] = useState({
+    moduleDivModel : false,
+    buttonModel : false,
+    backgroundImageModel : false,
+    FormModel : false,
+
+  });
+
+  return [modelShowHide, setModelShowHide];
+};

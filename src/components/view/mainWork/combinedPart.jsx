@@ -7,7 +7,10 @@ const CombinedPart = (props) => {
   return (
     <>
       <div className="combinedPart">
-        <Header />
+        <Header 
+          modelShowHide={props.modelShowHide}
+          setModelShowHide={props.setModelShowHide}
+        />
         <TextEditor
           editorMessage={props.editorMessage}
           setEditorMessage={props.setEditorMessage}
