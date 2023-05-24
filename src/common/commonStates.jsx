@@ -30,10 +30,11 @@ export const useModuleDivModelStates = () => {
   const [moduleDivStates, setModuleDivStates] = useState({
     layout : [12],
     shape : "square",
-    colors : [],
-    spacing : 10,
-    divWidth : 100,
-    divHeight : 100
+    colors : ["#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151",],
+    spacing : 0,
+    divHeight : 100,
+    borders : ['1'],
+    borderColors : ['#f05151']
   });
 
   return [moduleDivStates, setModuleDivStates];

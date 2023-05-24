@@ -101,3 +101,6 @@ footer{
 .moduleDivPreviewScreen{
   border: 1px solid black;
 }
+.layoutButton{
+  flex-direction: column;
+}
