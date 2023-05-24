@@ -1,9 +1,9 @@
-import { Modal, Select } from "antd";
+import { Button, Modal, Select } from "antd";
 import React, { useState } from "react";
 
 const AddMoreDivLayoutModel = (props) => {
   const [numberOfColumns, setNumberOfColumns] = useState([1]);
-  const [columnValues, setColumnValues] = useState([]);
+  const [columnValues, setColumnValues] = useState(["12"]);
 
   const handleChange = (value) => {
     setNumberOfColumns([value]);
@@ -22,13 +22,12 @@ const AddMoreDivLayoutModel = (props) => {
       layout: columnValues,
     });
     setColumnValues([]);
-    setNumberOfColumns([1])
+    setNumberOfColumns([1]);
   };
   const handleCancel = () => {
     props.setAddMoreLayoutModel(false);
     setColumnValues([]);
-    setNumberOfColumns([1])
-
+    setNumberOfColumns([1]);
   };
   return (
     <>
@@ -38,6 +37,21 @@ const AddMoreDivLayoutModel = (props) => {
         onOk={handleOk}
         onCancel={handleCancel}
         width={1000}
+        maskClosable={false}
+        className="addMoreDivModelBox"
+        footer={[
+          <Button key="back" className="btn btn-danger" onClick={handleCancel}>
+            Discard
+          </Button>,
+          <Button
+            key="submit"
+            type="primary"
+            className="btn btn-success"
+            onClick={handleOk}
+          >
+            Submit
+          </Button>,
+        ]}
       >
         <div className="row m-2">
           {/* desgining Screen */}
@@ -76,7 +90,6 @@ const AddMoreDivLayoutModel = (props) => {
                     value: "6",
                     label: "6",
                   },
-                  
                 ]}
               />
             </div>
@@ -93,7 +106,7 @@ const AddMoreDivLayoutModel = (props) => {
                   </label>
                   <Select
                     id={`columnValue_${index}`}
-                    defaultValue="2"
+                    value={columnValues[index]}
                     onChange={(value) => handleColumnChange(value, index)}
                     options={[
                       { value: "2", label: "2" },
@@ -121,11 +134,10 @@ const AddMoreDivLayoutModel = (props) => {
                   style={{
                     // width: `100%`,
                     height: "100px",
-                    border : "1px Solid black"
+                    border: "1px Solid black",
                   }}
                 />
               ))}
-             
             </div>
           </div>
         </div>

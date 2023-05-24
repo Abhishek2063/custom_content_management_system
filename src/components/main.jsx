@@ -3,6 +3,7 @@ import Sidebar from "./view/sidebar";
 import CombinedPart from "./view/mainWork/combinedPart";
 import { useEditorMessage, useModelShowHide, useModuleDivModelStates } from "../common/commonStates";
 import ModuleDivModel from "./view/mainWork/model/moduleDivModel";
+import ButtonSectionModel from "./view/mainWork/model/buttonSectionModel";
 
 const Main = () => {
 
@@ -36,6 +37,14 @@ const Main = () => {
            moduleDivStates={moduleDivStates}
            setModuleDivStates={setModuleDivStates}
 
+        />
+
+        {/* button section model */}
+        <ButtonSectionModel 
+        editorMessage={editorMessage}
+        setEditorMessage={setEditorMessage}
+        modelShowHide={modelShowHide}
+        setModelShowHide={setModelShowHide}
         />
       </div>
     </>

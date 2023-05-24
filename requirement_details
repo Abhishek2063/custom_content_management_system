@@ -13,5 +13,25 @@ user have the option to provide the shape of all the div by a dropdown like roun
 user have the option to provide different colors to different divs. user can provide the gradient color to the divs.
 user can maintain the space between the divs.
 user can maintain the height and width in percentage or pixcel by default height and width of a div is 100 px
+user can provide the border to the div.
+user can provide the border color to the div.
 in react js
 
+
+create react app in which user have the option to desgin the button 
+in the button module user have two screen first for desiging screen and preview screen.
+on the desgining screen,
+user can provide the name of the button
+user can provide the shape of the button
+user can provide the size of the button
+user can provide the type of the button
+user can provide the color to the button
+user can provide the gradient color to the button.
+for the gradient user have select box of what type of gradient user want like 
+Linear Gradients (goes down/up/left/right/diagonally)
+Radial Gradients (defined by their center)
+Conic Gradients (rotated around a center point)
+after that user have option to choose the color and direction set option
+user can maintain the font size of the text in the button
+user can provide the functionality of the button like user need the button
+ to clear the data, need to redirect somewhere for that user need to provide the url

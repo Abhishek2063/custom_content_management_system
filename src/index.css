@@ -1,17 +1,15 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-.combinedPart{
+.combinedPart {
   width: 100%;
   height: 100vh;
 }
@@ -27,11 +25,10 @@ code {
   justify-content: center;
   background: #eeeeee9e;
 } */
-ul.ant-menu{
+ul.ant-menu {
   height: calc(100vh - 92px);
-
 }
-.jodit-wysiwyg{
+.jodit-wysiwyg {
   max-height: 600px !important;
   overflow: auto !important;
 }
@@ -57,13 +54,12 @@ ul.ant-menu{
   margin: 10px;
   padding: 10px;
   background-color: antiquewhite;
-
 }
-.formFieldsContainer{
+.formFieldsContainer {
   max-height: 600px;
   overflow: auto;
 }
-.formPreviewContainer{
+.formPreviewContainer {
   max-height: 600px;
   overflow: auto;
 }
@@ -88,19 +84,31 @@ span.logo-text {
   background: #eee;
   height: calc(100vh - 128px);
 }
-footer{
+footer {
   padding-top: 10px;
 }
-.dropdown-item-popover:hover{
+.dropdown-item-popover:hover {
   background-color: #80808061;
 }
 .moduleDivDesigningScreen {
   border: 1px solid black;
 }
 
-.moduleDivPreviewScreen{
+.moduleDivPreviewScreen {
   border: 1px solid black;
 }
-.layoutButton{
+.layoutButton {
   flex-direction: column;
+}
+.ModuleDivModelBox .ant-modal-footer {
+  justify-content: end;
+  display: flex;
+}
+.addMoreDivModelBox .ant-modal-footer {
+  justify-content: end;
+  display: flex;
+}
+.buttonModelBox .ant-modal-footer {
+  justify-content: end;
+  display: flex;
 }

@@ -134,6 +134,7 @@ export const editorConfig = {
   askBeforePasteHTML: true,
   askBeforePasteFromWord: true,
   defaultActionOnPaste: "insert_clear_html",
+  usePopupForSpecialCharacters: true,
   buttons: buttons,
   fillEmptyParagraph: false,
   cleanHTML: {

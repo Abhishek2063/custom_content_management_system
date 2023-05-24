@@ -1,4 +1,4 @@
-import { Modal, Select } from "antd";
+import { Button, Modal, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import ViewAgendaIcon from "@mui/icons-material/ViewAgenda";
@@ -179,10 +179,21 @@ const ModuleDivModel = (props) => {
     <>
       <Modal
         title="Module Div"
+        className="ModuleDivModelBox"
         open={props.modelShowHide.moduleDivModel}
         onOk={handleOk}
         onCancel={handleCancel}
         width={1000}
+        maskClosable={false}
+        footer={[
+          <Button key="back" className = "btn btn-danger" onClick={handleCancel}>
+            Discard
+          </Button>,
+          <Button key="submit" type="primary"  className = "btn btn-success" onClick={handleOk}>
+            Submit
+          </Button>,
+          
+        ]}
       >
         <div className="row m-2">
           {/* desgining Screen */}

@@ -16,11 +16,10 @@ export const useEditorMessage = () => {
 
 export const useModelShowHide = () => {
   const [modelShowHide, setModelShowHide] = useState({
-    moduleDivModel : false,
-    buttonModel : false,
-    backgroundImageModel : false,
-    FormModel : false,
-
+    moduleDivModel: false,
+    buttonModel: false,
+    backgroundImageModel: false,
+    FormModel: false,
   });
 
   return [modelShowHide, setModelShowHide];
@@ -28,13 +27,26 @@ export const useModelShowHide = () => {
 
 export const useModuleDivModelStates = () => {
   const [moduleDivStates, setModuleDivStates] = useState({
-    layout : [12],
-    shape : "square",
-    colors : ["#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151","#f05151",],
-    spacing : 0,
-    divHeight : 100,
-    borders : ['1'],
-    borderColors : ['#f05151']
+    layout: [12],
+    shape: "square",
+    colors: [
+      "#f05151",
+      "#f05151",
+      "#f05151",
+      "#f05151",
+      "#f05151",
+      "#f05151",
+      "#f05151",
+      "#f05151",
+      "#f05151",
+      "#f05151",
+      "#f05151",
+      "#f05151",
+    ],
+    spacing: 0,
+    divHeight: 100,
+    borders: ["1"],
+    borderColors: ["#f05151"],
   });
 
   return [moduleDivStates, setModuleDivStates];
