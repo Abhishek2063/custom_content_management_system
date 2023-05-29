@@ -1,13 +1,12 @@
 import { Button, Modal, Select } from "antd";
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import ReactDOMServer from "react-dom/server";
 
 const ModuleDivModel = (props) => {
   const [buttonValue, setButtonValue] = useState("View Button");
   const [buttonShape, setButtonShape] = useState("square");
-  const [buttonWidth, setButtonWidth] = useState(20);
-  const [buttonHeight, setButtonHeight] = useState(20);
+  const [buttonWidth, setButtonWidth] = useState(100);
+  const [buttonHeight, setButtonHeight] = useState(100);
   const [buttonFontSize, setButtonFontSize] = useState(20);
   const [buttonColorType, setButtonColorType] = useState("color");
   const [buttonColorValue, setButtonColorValue] = useState("#000");
@@ -24,6 +23,30 @@ const ModuleDivModel = (props) => {
       size: "farthest-corner",
       position: "center",
     });
+  const [buttonGradientColorValue, setButtonGradientColorValue] = useState([]);
+  // Hover type states
+  const [buttonHoverColorType, setButtonHoverColorType] = useState("color");
+  const [buttonHoverColorValue, setButtonHoverColorValue] = useState("#000");
+  const [buttonHoverGradientColorNumber, setButtonHoverGradientColorNumber] =
+    useState(1);
+  const [
+    buttonHoverGradientColorTypeStyle,
+    setButtonHoverGradientColorTypeStyle,
+  ] = useState("linear-gradient");
+  const [
+    buttonHoverGradientColorTypeStyleValue,
+    setButtonHoverGradientColorTypeStyleValue,
+  ] = useState("0deg");
+  const [
+    buttonHoverGradientColorRadialType,
+    setButtonHoverGradientColorRadialType,
+  ] = useState({
+    shape: "ellipse",
+    size: "farthest-corner",
+    position: "center",
+  });
+  const [buttonHoverGradientColorValue, setButtonHoverGradientColorValue] =
+    useState([]);
 
   const handleButtonNameChange = (e) => {
     setButtonValue(e.target.value);
@@ -55,6 +78,9 @@ const ModuleDivModel = (props) => {
 
   const handleButtonGradientColorNumberChange = (event) => {
     setButtonGradientColorNumber(Number(event.target.value));
+    setButtonGradientColorValue(
+      new Array(Number(event.target.value)).fill("#5f1c1c")
+    );
   };
 
   const handleButtonGradientColorTypeChange = (value) => {
@@ -85,6 +111,140 @@ const ModuleDivModel = (props) => {
     });
   };
 
+  const handleGradientColorValueChange = (event, index) => {
+    const newBorderColors = [...buttonGradientColorValue];
+    newBorderColors[index] = event.target.value;
+    setButtonGradientColorValue(newBorderColors);
+  };
+
+  // Hover button functions
+
+  const handleButtonHoverColorTypeChange = (value) => {
+    setButtonHoverColorType(value);
+  };
+
+  const handleButtonHoverColorValueChange = (e) => {
+    setButtonHoverColorValue(e.target.value);
+  };
+
+  const handleButtonHoverGradientColorNumberChange = (event) => {
+    setButtonHoverGradientColorNumber(Number(event.target.value));
+    setButtonHoverGradientColorValue(
+      new Array(Number(event.target.value)).fill("#5f1c1c")
+    );
+  };
+
+  const handleButtonHoverGradientColorTypeChange = (value) => {
+    setButtonHoverGradientColorTypeStyle(value);
+  };
+
+  const handleButtonHoverGradientColorTypeValueChange = (value) => {
+    setButtonHoverGradientColorTypeStyleValue(value);
+  };
+
+  const handleRadialHoverColorShape = (value) => {
+    setButtonHoverGradientColorRadialType({
+      ...buttonHoverGradientColorRadialType,
+      shape: value,
+    });
+  };
+
+  const handleRadialHoverColorSize = (value) => {
+    setButtonHoverGradientColorRadialType({
+      ...buttonHoverGradientColorRadialType,
+      size: value,
+    });
+  };
+  const handleRadialHoverColorPosition = (value) => {
+    setButtonHoverGradientColorRadialType({
+      ...buttonHoverGradientColorRadialType,
+      position: value,
+    });
+  };
+
+  const handleGradientHoverColorValueChange = (event, index) => {
+    const newBorderColors = [...buttonGradientColorValue];
+    newBorderColors[index] = event.target.value;
+    setButtonHoverGradientColorValue(newBorderColors);
+  };
+
+  // Helper function to generate gradient style
+  const getGradientStyle = (type, value, colors) => {
+    if (type === "linear-gradient") {
+      return `${type}(${value}, ${colors.join(", ")})`;
+    } else if (type === "radial-gradient") {
+      const { shape, size, position } = buttonGradientColorRadialType;
+      return `${type}(${shape} ${size} at ${position}, ${colors.join(", ")})`;
+    }
+    return "";
+  };
+
+  // Define the style object for the button
+  const buttonStyle = {
+    width: buttonWidth,
+    height: buttonHeight,
+    fontSize: buttonFontSize,
+    color: "white",
+    cursor: "pointer",
+    transition: "all 0.3s ease-in-out",
+    boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.5)",
+    borderRadius: buttonShape === "rounded" ? "50px" : 0,
+
+    background: buttonColorValue,
+    backgroundColor : buttonHoverColorValue,
+  };
+  switch (buttonColorType) {
+    case "color":
+      buttonStyle.backgroundColor = buttonColorValue;
+      break;
+    case "gradient":
+      buttonStyle.backgroundImage = getGradientStyle(
+        buttonGradientColorTypeStyle,
+        buttonGradientColorTypeStyleValue,
+        buttonGradientColorValue
+      );
+      break;
+    default:
+      break;
+  }
+
+  switch (buttonHoverColorType) {
+    case "color":
+      buttonStyle.backgroundColor = buttonHoverColorValue;
+      break;
+    case "gradient":
+      buttonStyle.backgroundColor = getGradientStyle(
+        buttonHoverGradientColorTypeStyle,
+        buttonHoverGradientColorTypeStyleValue,
+        buttonHoverGradientColorValue
+      );
+      break;
+    default:
+      break;
+  }
+ 
+
+  const renderDivs = () => {
+    const ButtonLayout = (
+      <div className="preview row">
+        <button
+          style={buttonStyle}
+          
+        >
+          {buttonValue}
+        </button>
+      </div>
+    );
+
+    return ButtonLayout;
+  };
+
+  const generateButtonLayouts = () => {
+    // Generate the div layouts dynamically
+    const sourceCode = ReactDOMServer.renderToStaticMarkup(renderDivs());
+    return sourceCode;
+  };
+
   const handleOk = () => {
     props.setModelShowHide({
       ...props.modelShowHide,
@@ -94,10 +254,11 @@ const ModuleDivModel = (props) => {
       FormModel: false,
     });
 
-    // props.setEditorMessage({
-    //   ...props.editorMessage,
-    //   message: props.editorMessage.message.concat(generateDivLayouts()),
-    // });
+    props.setEditorMessage({
+      ...props.editorMessage,
+      message: props.editorMessage.message.concat(generateButtonLayouts()),
+    });
+   
   };
   const handleCancel = () => {
     props.setModelShowHide({
@@ -108,7 +269,6 @@ const ModuleDivModel = (props) => {
       FormModel: false,
     });
   };
-  console.log(buttonShape, "buttonShape");
   return (
     <>
       <Modal
@@ -244,7 +404,7 @@ const ModuleDivModel = (props) => {
             {/* Button Color Choose */}
 
             {/* color type button choose */}
-            {buttonColorType === "color" && (
+            {buttonColorType === "color" ? (
               <div className="col-12 mt-4">
                 <label htmlFor="buttonColor" className="fw-bold">
                   Color of the Button(in pixels):
@@ -256,51 +416,62 @@ const ModuleDivModel = (props) => {
                   onChange={handleButtonColorValueChange}
                 />
               </div>
+            ) : (
+              ""
             )}
 
             {/* Gradient Color Type */}
 
             {/* gradient Color Numbers */}
-            <div className="col-12 mt-4">
-              <label htmlFor="gradientColorType" className="fw-bold">
-                Number of the Gradient Color (in pixels):
-              </label>
-              <input
-                id="gradientColorType"
-                className="form-control"
-                type="number"
-                min="1"
-                value={buttonGradientColorNumber}
-                onChange={handleButtonGradientColorNumberChange}
-              />
-            </div>
+            {buttonColorType === "gradient" ? (
+              <div className="col-12 mt-4">
+                <label htmlFor="gradientColorType" className="fw-bold">
+                  Number of the Gradient Color (in pixels):
+                </label>
+                <input
+                  id="gradientColorType"
+                  className="form-control"
+                  type="number"
+                  min="1"
+                  value={buttonGradientColorNumber}
+                  onChange={handleButtonGradientColorNumberChange}
+                />
+              </div>
+            ) : (
+              ""
+            )}
 
             {/* Gradient Style Type */}
-            <div className="form-group mt-3">
-              <label htmlFor="buttonColor" className="fw-bold">
-                Choose Button Gradient Color Type Style :
-              </label>
-              <Select
-                value={buttonGradientColorTypeStyle}
-                onChange={handleButtonGradientColorTypeChange}
-                options={[
-                  {
-                    value: "linear-gradient",
-                    label: "Linear Gradients",
-                  },
-                  {
-                    value: "radial-gradient",
-                    label: "Radial Gradients",
-                  },
-                  {
-                    value: "conic-gradient",
-                    label: "Conic Gradients",
-                  },
-                ]}
-              />
-            </div>
+            {buttonColorType === "gradient" ? (
+              <div className="form-group mt-3">
+                <label htmlFor="buttonColor" className="fw-bold">
+                  Choose Button Gradient Color Type Style :
+                </label>
+                <Select
+                  value={buttonGradientColorTypeStyle}
+                  onChange={handleButtonGradientColorTypeChange}
+                  options={[
+                    {
+                      value: "linear-gradient",
+                      label: "Linear Gradients",
+                    },
+                    {
+                      value: "radial-gradient",
+                      label: "Radial Gradients",
+                    },
+                    {
+                      value: "conic-gradient",
+                      label: "Conic Gradients",
+                    },
+                  ]}
+                />
+              </div>
+            ) : (
+              ""
+            )}
             {/* linear gradient type */}
-            {buttonGradientColorTypeStyle === "linear-gradient" && (
+            {(buttonGradientColorTypeStyle === "linear-gradient") &
+            (buttonColorType === "gradient") ? (
               <div className="form-group mt-3">
                 <label htmlFor="buttonColor" className="fw-bold">
                   Choose Linear Gradient Color Type Style :
@@ -310,76 +481,79 @@ const ModuleDivModel = (props) => {
                   onChange={handleButtonGradientColorTypeValueChange}
                   options={[
                     {
-                      value: "at top",
-                      label: "at top",
+                      value: "to top",
+                      label: "to top",
                     },
                     {
-                      value: "at top right",
-                      label: "at top right",
+                      value: "to top right",
+                      label: "to top right",
                     },
                     {
-                      value: "at right",
-                      label: "at right",
+                      value: "to right",
+                      label: "to right",
                     },
                     {
-                      value: "at bottom right",
-                      label: "at bottom right",
+                      value: "to bottom right",
+                      label: "to bottom right",
                     },
                     {
-                      value: "at bottom",
-                      label: "at bottom",
+                      value: "to bottom",
+                      label: "to bottom",
                     },
                     {
-                      value: "at bottom left",
-                      label: "at bottom left",
+                      value: "to bottom left",
+                      label: "to bottom left",
                     },
                     {
-                      value: "at left",
-                      label: "at left",
+                      value: "to left",
+                      label: "to left",
                     },
                     {
-                      value: "at top left",
-                      label: "at top left",
+                      value: "to top left",
+                      label: "to top left",
                     },
                     {
-                      value: "at 0deg",
-                      label: "at 0 degrees",
+                      value: " 0deg",
+                      label: " 0 degrees",
                     },
                     {
-                      value: "at 45deg",
-                      label: "at 45 degrees",
+                      value: " 45deg",
+                      label: " 45 degrees",
                     },
                     {
-                      value: "at 90deg",
-                      label: "at 90 degrees",
+                      value: " 90deg",
+                      label: " 90 degrees",
                     },
                     {
-                      value: "at 135deg",
-                      label: "at 135 degrees",
+                      value: " 135deg",
+                      label: " 135 degrees",
                     },
                     {
-                      value: "at 180deg",
-                      label: "at 180 degrees",
+                      value: " 180deg",
+                      label: " 180 degrees",
                     },
                     {
-                      value: "at 225deg",
-                      label: "at 225 degrees",
+                      value: " 225deg",
+                      label: " 225 degrees",
                     },
                     {
-                      value: "at 270deg",
-                      label: "at 270 degrees",
+                      value: " 270deg",
+                      label: " 270 degrees",
                     },
                     {
-                      value: "at 315deg",
-                      label: " at 315 degrees",
+                      value: " 315deg",
+                      label: "  315 degrees",
                     },
                   ]}
                 />
               </div>
+            ) : (
+              ""
             )}
             {/* radial gradient type */}
             {/* shape */}
-            {buttonGradientColorTypeStyle === "radial-gradient" && (
+            {buttonGradientColorTypeStyle === "radial-gradient" &&
+            buttonColorType === "gradient" ? (
               <div className="form-group mt-3">
                 <label htmlFor="buttonColor" className="fw-bold">
                   Choose Radial Gradient Color Shape:
@@ -399,10 +573,13 @@ const ModuleDivModel = (props) => {
                   ]}
                 />
               </div>
+            ) : (
+              ""
             )}
 
             {/* Size */}
-            {buttonGradientColorTypeStyle === "radial-gradient" && (
+            {buttonGradientColorTypeStyle === "radial-gradient" &&
+            buttonColorType === "gradient" ? (
               <div className="form-group mt-3">
                 <label htmlFor="buttonColor" className="fw-bold">
                   Choose Radial Gradient Color Size:
@@ -432,10 +609,13 @@ const ModuleDivModel = (props) => {
                   ]}
                 />
               </div>
+            ) : (
+              ""
             )}
 
             {/* Position */}
-            {buttonGradientColorTypeStyle === "radial-gradient" && (
+            {buttonGradientColorTypeStyle === "radial-gradient" &&
+            buttonColorType === "gradient" ? (
               <div className="form-group mt-3">
                 <label htmlFor="buttonColor" className="fw-bold">
                   Choose Radial Gradient Color Position:
@@ -515,12 +695,384 @@ const ModuleDivModel = (props) => {
                   ]}
                 />
               </div>
+            ) : (
+              ""
             )}
+
+            {/* Gradient Color */}
+            {buttonColorType === "gradient"
+              ? Array.from({ length: buttonGradientColorNumber }).map(
+                  (_, index) => (
+                    <div className="form-group m-4" key={index}>
+                      <label
+                        htmlFor={`gradientColorValue_${index}`}
+                        className="fw-bold"
+                      >
+                        Select Gradient Color {index + 1}:
+                      </label>
+                      <input
+                        id={`gradientColorValue_${index}`}
+                        type="color"
+                        value={buttonGradientColorValue[index]}
+                        onChange={(event) =>
+                          handleGradientColorValueChange(event, index)
+                        }
+                      />
+                    </div>
+                  )
+                )
+              : ""}
+
+            {/* Hover Effect in button */}
+
+            <h5 className="mt-3">Hover Effect Of The Button</h5>
+            {/* button color type */}
+            <div className="form-group mt-3">
+              <label htmlFor="buttonColor" className="fw-bold">
+                Choose Button Color Type :
+              </label>
+              <Select
+                value={buttonHoverColorType}
+                onChange={handleButtonHoverColorTypeChange}
+                options={[
+                  {
+                    value: "color",
+                    label: "Color",
+                  },
+                  {
+                    value: "gradient",
+                    label: "Gradient",
+                  },
+                ]}
+              />
+            </div>
+
+            {/* Button Color Choose */}
+
+            {/* color type button choose */}
+            {buttonHoverColorType === "color" ? (
+              <div className="col-12 mt-4">
+                <label htmlFor="buttonColor" className="fw-bold">
+                  Color of the Button(in pixels):
+                </label>
+                <input
+                  id="buttonColor"
+                  type="color"
+                  value={buttonHoverColorValue}
+                  onChange={handleButtonHoverColorValueChange}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+
+            {/* Gradient Color Type */}
+
+            {/* gradient Color Numbers */}
+            {buttonHoverColorType === "gradient" ? (
+              <div className="col-12 mt-4">
+                <label htmlFor="gradientColorType" className="fw-bold">
+                  Number of the Gradient Color (in pixels):
+                </label>
+                <input
+                  id="gradientColorType"
+                  className="form-control"
+                  type="number"
+                  min="1"
+                  value={buttonHoverGradientColorNumber}
+                  onChange={handleButtonHoverGradientColorNumberChange}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+
+            {/* Gradient Style Type */}
+            {buttonHoverColorType === "gradient" ? (
+              <div className="form-group mt-3">
+                <label htmlFor="buttonColor" className="fw-bold">
+                  Choose Button Gradient Color Type Style :
+                </label>
+                <Select
+                  value={buttonHoverGradientColorTypeStyle}
+                  onChange={handleButtonHoverGradientColorTypeChange}
+                  options={[
+                    {
+                      value: "linear-gradient",
+                      label: "Linear Gradients",
+                    },
+                    {
+                      value: "radial-gradient",
+                      label: "Radial Gradients",
+                    },
+                    {
+                      value: "conic-gradient",
+                      label: "Conic Gradients",
+                    },
+                  ]}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+            {/* linear gradient type */}
+            {(buttonHoverGradientColorTypeStyle === "linear-gradient") &
+            (buttonHoverColorType === "gradient") ? (
+              <div className="form-group mt-3">
+                <label htmlFor="buttonColor" className="fw-bold">
+                  Choose Linear Gradient Color Type Style :
+                </label>
+                <Select
+                  value={buttonHoverGradientColorTypeStyleValue}
+                  onChange={handleButtonHoverGradientColorTypeValueChange}
+                    options={[
+                      {
+                        value: "to top",
+                        label: "to top",
+                      },
+                      {
+                        value: "to top right",
+                        label: "to top right",
+                      },
+                      {
+                        value: "to right",
+                        label: "to right",
+                      },
+                      {
+                        value: "to bottom right",
+                        label: "to bottom right",
+                      },
+                      {
+                        value: "to bottom",
+                        label: "to bottom",
+                      },
+                      {
+                        value: "to bottom left",
+                        label: "to bottom left",
+                      },
+                      {
+                        value: "to left",
+                        label: "to left",
+                      },
+                      {
+                        value: "to top left",
+                        label: "to top left",
+                      },
+                      {
+                        value: " 0deg",
+                        label: " 0 degrees",
+                      },
+                      {
+                        value: " 45deg",
+                        label: " 45 degrees",
+                      },
+                      {
+                        value: " 90deg",
+                        label: " 90 degrees",
+                      },
+                      {
+                        value: " 135deg",
+                        label: " 135 degrees",
+                      },
+                      {
+                        value: " 180deg",
+                        label: " 180 degrees",
+                      },
+                      {
+                        value: " 225deg",
+                        label: " 225 degrees",
+                      },
+                      {
+                        value: " 270deg",
+                        label: " 270 degrees",
+                      },
+                      {
+                        value: " 315deg",
+                        label: "  315 degrees",
+                      },
+                    ]}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+            {/* radial gradient type */}
+            {/* shape */}
+            {buttonHoverGradientColorTypeStyle === "radial-gradient" &&
+            buttonHoverColorType === "gradient" ? (
+              <div className="form-group mt-3">
+                <label htmlFor="buttonColor" className="fw-bold">
+                  Choose Radial Gradient Color Shape:
+                </label>
+                <Select
+                  value={buttonHoverGradientColorRadialType.shape}
+                  onChange={handleRadialHoverColorShape}
+                  options={[
+                    {
+                      value: "ellipse",
+                      label: "Ellipse",
+                    },
+                    {
+                      value: "circle",
+                      label: "Circle",
+                    },
+                  ]}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+
+            {/* Size */}
+            {buttonHoverGradientColorTypeStyle === "radial-gradient" &&
+            buttonHoverColorType === "gradient" ? (
+              <div className="form-group mt-3">
+                <label htmlFor="buttonColor" className="fw-bold">
+                  Choose Radial Gradient Color Size:
+                </label>
+                <Select
+                  value={buttonHoverGradientColorRadialType.size}
+                  onChange={handleRadialHoverColorSize}
+                  options={[
+                    {
+                      value: "farthest-corner ",
+                      label: "Farthest Corner ",
+                    },
+                    {
+                      value: "closest-side",
+                      label: "Closest Side",
+                    },
+
+                    {
+                      value: "closest-corner",
+                      label: "Closest Corner",
+                    },
+
+                    {
+                      value: "farthest-side",
+                      label: "Farthest Side",
+                    },
+                  ]}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+
+            {/* Position */}
+            {buttonHoverGradientColorTypeStyle === "radial-gradient" &&
+            buttonHoverColorType === "gradient" ? (
+              <div className="form-group mt-3">
+                <label htmlFor="buttonColor" className="fw-bold">
+                  Choose Radial Gradient Color Position:
+                </label>
+                <Select
+                  value={buttonHoverGradientColorRadialType.position}
+                  onChange={handleRadialHoverColorPosition}
+                  options={[
+                    {
+                      value: "to center",
+                      label: "To center",
+                    },
+                    {
+                      value: "to top",
+                      label: "To top",
+                    },
+                    {
+                      value: "to top right",
+                      label: "To top right",
+                    },
+                    {
+                      value: "to right",
+                      label: "To right",
+                    },
+                    {
+                      value: "to bottom right",
+                      label: "To bottom right",
+                    },
+                    {
+                      value: "to bottom",
+                      label: "To bottom",
+                    },
+                    {
+                      value: "to bottom left",
+                      label: "To bottom left",
+                    },
+                    {
+                      value: "to left",
+                      label: "To left",
+                    },
+                    {
+                      value: "to top left",
+                      label: "To top left",
+                    },
+                    {
+                      value: " 0deg",
+                      label: " 0 degrees",
+                    },
+                    {
+                      value: " 45deg",
+                      label: " 45 degrees",
+                    },
+                    {
+                      value: " 90deg",
+                      label: " 90 degrees",
+                    },
+                    {
+                      value: " 135deg",
+                      label: " 135 degrees",
+                    },
+                    {
+                      value: " 180deg",
+                      label: " 180 degrees",
+                    },
+                    {
+                      value: " 225deg",
+                      label: " 225 degrees",
+                    },
+                    {
+                      value: " 270deg",
+                      label: " 270 degrees",
+                    },
+                    {
+                      value: " 315deg",
+                      label: " 315 degrees",
+                    },
+                  ]}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+
+            {/* Gradient Color */}
+            {buttonHoverColorType === "gradient"
+              ? Array.from({ length: buttonHoverGradientColorNumber }).map(
+                  (_, index) => (
+                    <div className="form-group m-4" key={index}>
+                      <label
+                        htmlFor={`gradientColorValue_${index}`}
+                        className="fw-bold"
+                      >
+                        Select Gradient Color {index + 1}:
+                      </label>
+                      <input
+                        id={`gradientColorValue_${index}`}
+                        type="color"
+                        value={buttonHoverGradientColorValue[index]}
+                        onChange={(event) =>
+                          handleGradientHoverColorValueChange(event, index)
+                        }
+                      />
+                    </div>
+                  )
+                )
+              : ""}
           </div>
           {/* preview screen */}
           <div className="col-6 moduleDivPreviewScreen">
             <h3>Preview Screen</h3>
-            {/* {renderDivs()} */}
+            {renderDivs()}
           </div>
         </div>
       </Modal>
