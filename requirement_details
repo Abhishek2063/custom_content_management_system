@@ -35,3 +35,18 @@ after that user have option to choose the color and direction set option
 user can maintain the font size of the text in the button
 user can provide the functionality of the button like user need the button
  to clear the data, need to redirect somewhere for that user need to provide the url
+
+
+
+create the react app to set the background section
+user have two screen first is the desgining screen and second is the preview screen
+on the desgining screen user have
+the choose type of section using antd select tag and user have color, gradient and image option by default color will select.
+if user select the color option then user will get the select color value using html input tag type color.
+
+if user select the gradient option then user will get the
+number of gradient color its want
+according to that show all input tag for select color value
+user have the option to choose the gradient type in which have the all type of gradient features
+if user choose the image then user will have all type of functionality to set the backgraound 
+the purpose of this app to create a app who will designed the backgraound section.
