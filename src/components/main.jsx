@@ -1,9 +1,10 @@
 import React from "react";
-import Sidebar from "./view/sidebar";
-import CombinedPart from "./view/mainWork/combinedPart";
 import { useEditorMessage, useModelShowHide, useModuleDivModelStates } from "../common/commonStates";
-import ModuleDivModel from "./view/mainWork/model/moduleDivModel";
+import CombinedPart from "./view/mainWork/combinedPart";
+import BackgroundImageModel from "./view/mainWork/model/BackgroundImageModel";
 import ButtonSectionModel from "./view/mainWork/model/buttonSectionModel";
+import ModuleDivModel from "./view/mainWork/model/moduleDivModel";
+import Sidebar from "./view/sidebar";
 
 const Main = () => {
 
@@ -45,6 +46,14 @@ const Main = () => {
         setEditorMessage={setEditorMessage}
         modelShowHide={modelShowHide}
         setModelShowHide={setModelShowHide}
+        />
+
+        {/* Background Image Model */}
+        <BackgroundImageModel 
+          editorMessage={editorMessage}
+          setEditorMessage={setEditorMessage}
+          modelShowHide={modelShowHide}
+          setModelShowHide={setModelShowHide}
         />
       </div>
     </>
